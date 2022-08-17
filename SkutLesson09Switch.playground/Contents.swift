@@ -165,19 +165,19 @@ print("The age \(humAge) - \(stage)")
 
 print("\n#3. Appeal to the person.")
 
-let (lastName, firstName, middleName) = ("Maslov", "Ivan", "Alekseevich")
+let fullName = (last: "Maslov", first: "Ivan", middle: "Alekseevich")
 
 let greeting: String
 
-switch (lastName[lastName.startIndex], firstName[firstName.startIndex], middleName[middleName.startIndex]) {
-case (_, let firstNameSymbol, _) where firstNameSymbol == "A" || firstNameSymbol == "O":
-    greeting = firstName
-case (_, _, let middleNameSymbol) where middleNameSymbol == "B" || middleNameSymbol == "D":
-    greeting = firstName + " " + middleName
-case (let lastNameSymbol, _, _) where lastNameSymbol == "E" || lastNameSymbol == "Z":
-    greeting = lastName
+switch fullName {
+case (_, let firstSymbol, _) where firstSymbol.hasPrefix("A") || firstSymbol.hasPrefix("O"):
+    greeting = fullName.first
+case (_, _, let firstSymbol) where firstSymbol.hasPrefix("B") || firstSymbol.hasPrefix("D"):
+    greeting = fullName.first + " " + fullName.middle
+case (let firstSymbol, _, _) where firstSymbol.hasPrefix("E") || firstSymbol.hasPrefix("Z"):
+    greeting = fullName.last
 default:
-    greeting = lastName + " " + firstName + " " + middleName
+    greeting = fullName.last + " " + fullName.first + " " + fullName.middle
 }
 
 print("Hello, \(greeting)!")
