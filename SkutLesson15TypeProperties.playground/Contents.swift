@@ -108,3 +108,36 @@ let cat2 = Cat(name: "Acsy", age: 1)
 Cat.totalCats
 
 cat.name = "djdkfnjsfkbdf"
+
+
+// HW part 1. Создать структуру "Описание файла", которая будет иметь свойства - путь к файлу, - имя файла, максимальный размер файлы на диске, - путь к папке, содержащей файл, - скрытый/нескрытый файл, - содержимое файла
+
+print("\n#1. File description.\n")
+
+enum FileType {
+    case visible
+    case hidden
+}
+
+struct FileDescription {
+    
+    static let maxSize = 1_000_000
+    var fileName: String
+    var fileContent: String
+    var fileSize: Int {
+        didSet {
+            if fileSize > FileDescription.maxSize {
+                fileSize = oldValue
+            }
+        }
+    }
+    var fileType: FileType
+    var pathFolder: String
+    var path: String {
+        return pathFolder + fileName
+    }
+}
+
+var testFile = FileDescription(fileName: "TestName.txt", fileContent: "Content", fileSize: 35234, fileType: .visible, pathFolder: "C:\\Documents")
+print(testFile.path, String(testFile.fileSize) + "kb", testFile.fileType)
+testFile.fileSize = 5435345245
